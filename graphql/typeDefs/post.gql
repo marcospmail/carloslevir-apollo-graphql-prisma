@@ -1,8 +1,0 @@
-type Post {
-
-}
-
-type Query {
-  posts: [Post]
-  post: Post
-}
