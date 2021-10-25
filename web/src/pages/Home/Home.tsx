@@ -1,9 +1,10 @@
 import React from 'react'
-import { useQuery } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 
 import logo from './logo.svg'
 import './Home.css'
-import { GET_POST, GET_POSTS } from '../../services/graphql/modules/post/queries'
+import { GET_POST } from '../../services/graphql/modules/post/queries'
+import { CREATE_USER } from '../../services/graphql/modules/user/mutation'
 
 interface Post {
   title: string
@@ -18,13 +19,20 @@ function Home() {
     }
   })
 
+  const [createUser, { data: userData }] = useMutation(CREATE_USER)
+
+  function handleCreateUser() {
+    createUser({ variables: { email: 'marcospasdasdadsad.mail@gmaiasdadl.com', name: 'Marcasasddados Paasdulo' } })
+  }
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          { data?.post.title}
-          {/* { data?.posts.map(post => post.title )} */}
+          {data?.post.title}
+          {userData?.createUser.name}
+          <button onClick={handleCreateUser}>Create User</button>
         </p>
       </header>
     </div>
